@@ -108,9 +108,10 @@ android:targetPackage ="com.my.company.app.package"
 
 ### 实际上以上两步都可以在Eclipse当中快速完成: ###
 
-在Eclipse当中点击打开->引入，在弹出窗口![pop](http://ntu.me/di/HV9G1/pop-up.jpg)选择Existing Android Code Into Workspace，点击“下一步”进入第二个窗口![pop2](http://ntu.me/di/22P37/pop-up2.jpg)，在root directory选中你的robtium rc的目录，然后再勾选上SAFSTCPMessenger和SAFSTestRunner，将他们导入到Eclipse里面。导入后，分别去修改SAFSTCPMessenger的local.properties当中的sdk.dir和safs.droid.automation.libs的值为![下图](http://ntu.me/di/A5XFG/1.jpg)，将SAFSTestRunner的AndroidManifest.xml当中的*instrumentation*标签修改为![下图](http://ntu.me/di/9SSFI/2.jpg) 
+在Eclipse当中点击打开->引入，在弹出窗口![pop](http://www.geekpics.net/images/2014/10/17/FsXcPht.png)选择Existing Android Code Into Workspace，点击“下一步”进入第二个窗口![pop2](http://www.geekpics.net/images/2014/10/17/mBewyic9HY.png)，在root directory选中你的robtium rc的目录，然后再勾选上SAFSTCPMessenger和SAFSTestRunner，将他们导入到Eclipse里面。导入后，分别去修改SAFSTCPMessenger的local.properties当中的sdk.dir和safs.droid.automation.libs的值为![下图](http://www.geekpics.net/images/2014/10/17/PlaBv.png)，将SAFSTestRunner的AndroidManifest.xml当中的*instrumentation*标签修改为![下图](http://www.geekpics.net/images/2014/10/17/iQJt.png) 
 
-修改完成以后，就可以将两个包导出为apk了：![导出](http://ntu.me/di/LZOQO/1.jpg)
+修改完成以后，就可以将两个包导出为apk了：![导出](http://www.geekpics.net/images/2014/10/17/XtygFpYQh6.png)
+同时在导出的时候，会让你输入keystore password![keystore](http://www.geekpics.net/images/2014/10/17/ubhxlP5w.png),这是选择Use existing keystore,然后选择browse，去你当前用户的文档下面的.android文件夹里面去找到这个keystore文件，然后再输入密码的时候输入密码android。
 
 这样就完成了大部分的准备工作了。
 
