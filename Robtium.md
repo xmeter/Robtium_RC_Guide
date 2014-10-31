@@ -220,3 +220,20 @@ android:targetPackage ="com.my.company.app.package"
     	</target>
     
     </project>
+
+# 常见问题 #
+## 安装包重签名后安装时提示install parse failed no certificates ##
+
+这个问题的主要原因是签名所使用的key不一致导致的，常常是由于jdk升级造成的这个问题，在使用jdk1.7进行签名的时候，我们需要加入一**些参数**： -digestalg SHA1 -sigalg MD5withRSA进去才能使用新的keystore进行签名。
+
+具体的命令如下：
+
+    C:\Program Files\Java\jdk1.7.0_40/bin/jarsigner -sigalg MD5withRSA
+     -digestalg SHA1 -keystore C:\Users\yljyd/.android/debug.keystore -storepass and
+    roid -keypass android C:\Users\yljyd\AppData\Local\Temp\resigner2817140533305512121.apk androiddebugkey
+
+    F:\Development Tools\adt-bundle-windows-x86_64-20130917\sdk/tools/
+    zipalign -f 4 C:\Users\yljyd\AppData\Local\Temp\resigner2817140533305512121.apk
+    C:\Users\yljyd\Desktop\com.yahoo.mobile.client.android.finance-600205-debug_debug.apk
+
+或者使用我提供的[修改过的重签名工具](https://drive.google.com/file/d/0B5tDX2fy6xCjNWdkUE12RGlMSEU/view?usp=sharing)直接运行该jar包就可以进行签名了。
