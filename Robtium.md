@@ -119,107 +119,108 @@ android:targetPackage ="com.my.company.app.package"
 ------------------------------------------
 
     <?xml version="1.0" encoding="UTF-8"?>
-    <project basedir="." default="test" name="xx"><!--name就是你当前项目的名称-->
-    	<property environment="env" />
-    	<property name="base.dir" value="." />
-    	<property name="testng.output.dir" value="${base.dir}/test-output" />
-    	<property name="3rd.lib.dir" value="${base.dir}/libs" />
-    	<property name="testng.file" value="testng.xml" />
-    	<property name="apkResigner" value="${base.dir}/tools/re-sign.jar" />
-    	<property name="apks.dir" value="${base.dir}/apks" />
-    	<property name="testedAPK" value="${apks.dir}/Sportacular.apk" />
-    	<property name="TestRunnerAPK" value="${apks.dir}/SAFSTestRunner.apk" />
-    	<property name="SAFSTCPMessengerAPK" value="${apks.dir}/SAFSTCPMessenger.apk" />
-    	<!-- property for generate R.java file -->
-    	<property name="sdk-build-tools" value="${env.android_home}/build-tools/18.1.1" />
-    	<property name="resource-dir" value="res" />
-    	<property name="sdk-folder" value="${env.android_home}" />
-    	<property name="sdk-platform-folder" value="${sdk-folder}/platforms/android-18" />
-    	<property name="android-jar" value="${sdk-platform-folder}/android.jar" />
-    	<property name="aapt" value="${sdk-build-tools}/aapt" />
-    	<property name="adb" value="${sdk-folder}/platform-tools/adb" />
-    	<property name="manifest-xml" value="AndroidManifest.xml" />
-    
-    	<taskdef resource="testngtasks" classpath="${3rd.lib.dir}/testng.jar" />
-    
-    	<target name="init">
-    		<delete dir="${base.dir}/bin" />
-    		<mkdir dir="${base.dir}/bin" />
-    		<delete dir="${base.dir}/res" />
-    		<mkdir dir="${base.dir}/res" />
-    	</target>
-    
-    	<target name="resignApk" depends="init">
-    		<java jar="${apkResigner}" fork="true">
-    			<arg value="${testedAPK}" />
-    			<arg value="${apks.dir}/android_mail_debug.apk" />
-    		</java>
-    		<java jar="${apkResigner}" fork="true">
-    			<arg value="${TestRunnerAPK}" />
-    			<arg value="${apks.dir}/SAFSTestRunner_debug.apk" />
-    		</java>
-    		<java jar="${apkResigner}" fork="true">
-    			<arg value="${SAFSTCPMessengerAPK}" />
-    			<arg value="${apks.dir}/SAFSTCPMessenger_debug.apk" />
-    		</java>
-    	</target>
-    
-    	<target name="decode-Res" depends="resignApk">
-    		<java jar="${base.dir}/tools/apktool.jar" fork="true">
-    			<arg value="d" />
-    			<arg value="-f" />
-    			<arg value="${apks.dir}/android_mail_debug.apk" />
-    			<arg value="${base.dir}/temp" />
-    		</java>
-    	</target>
-    
-    	<target name="clean" depends="decode-Res">
-    		<copydir src="${base.dir}/temp/res" dest="${base.dir}/res" />
-    		<copy file="${base.dir}/temp/${manifest-xml}" todir="${base.dir}/"
-    			overwrite="true" />
-    		<delete dir="${base.dir}/temp" />
-    	</target>
-    
-    	<target name="gen-R" depends="clean">
-    		<echo>Generating R.java from the resources...</echo>
-    		<exec executable="${aapt}" failonerror="true">
-    			<arg value="package" />
-    			<arg value="-f" />
-    			<arg value="-m" />
-    			<arg value="-J" />
-    			<arg value="${base.dir}/src" />
-    			<arg value="-S" />
-    			<arg value="${resource-dir}" />
-    			<arg value="-I" />
-    			<arg value="${android-jar}" />
-    			<arg value="-M" />
-    			<arg value="${manifest-xml}" />
-    		</exec>
-    	</target>
-    
-    	<target name="native2ascii" depends="gen-R">
-    		<native2ascii encoding="UTF-8" src="${base.dir}/src"
-    			dest="${base.dir}/src" includes="**/*.java" ext=".java" />
-    	</target>
-    
-    	<target name="compile" depends="native2ascii">
-    		<javac encoding="UTF-8" srcdir="${base.dir}/src" destdir="${base.dir}/bin"
-    			classpathref="classes" />
-    	</target>
-    
-    	<path id="classes">
-    		<fileset dir="${3rd.lib.dir}" includes="*jar" />
-    		<pathelement location="${base.dir}/bin" />
-    	</path>
-    
-    	<target name="test" depends="compile">
-    		<testng classpathref="classes" outputdir="${testng.output.dir}"
-    			haltOnfailure="false" delegateCommandSystemProperties="true">
-    			<xmlfileset dir="${base.dir}" includes="${testng.file}" />
-    		</testng>
-    	</target>
-    
-    </project>
+	<project basedir="." default="test" name="xxx"><!--name就是你当前项目的名称 -->
+	<property environment="env" />
+	<property name="base.dir" value="." />
+	<property name="testng.output.dir" value="${base.dir}/test-output" />
+	<property name="3rd.lib.dir" value="${base.dir}/libs" />
+	<property name="testng.file" value="testng.xml" />
+	<property name="apkResigner" value="${base.dir}/tools/re-sign.jar" />
+	<property name="apks.dir" value="${base.dir}/apks" />
+	<property name="testedAPK" value="${apks.dir}/xxx.apk" />
+	<property name="TestRunnerAPK" value="${apks.dir}/SAFSTestRunner.apk" />
+	<property name="SAFSTCPMessengerAPK" value="${apks.dir}/SAFSTCPMessenger.apk" />
+	<!-- property for generate R.java file -->
+	<property name="sdk-build-tools" value="${env.android_home}/build-tools/17.0.0" />
+	<property name="resource-dir" value="res" />
+	<property name="sdk-folder" value="${env.android_home}" />
+	<property name="sdk-platform-folder" value="${sdk-folder}/platforms/android-17" />
+	<property name="android-jar" value="${sdk-platform-folder}/android.jar" />
+	<property name="aapt" value="${sdk-build-tools}/aapt" />
+	<property name="adb" value="${sdk-folder}/platform-tools/adb" />
+	<property name="manifest-xml" value="AndroidManifest.xml" />
+
+	<taskdef resource="testngtasks" classpath="${3rd.lib.dir}/testng.jar" />
+
+	<target name="init">
+		<delete dir="${base.dir}/bin" />
+		<mkdir dir="${base.dir}/bin" />
+		<delete dir="${base.dir}/res" />
+		<mkdir dir="${base.dir}/res" />
+	</target>
+
+	<target name="resignApk" depends="init">
+		<java jar="${apkResigner}" fork="true">
+			<arg value="${testedAPK}" />
+			<arg value="${apks.dir}/xxx_debug.apk" />
+		</java>
+		<java jar="${apkResigner}" fork="true">
+			<arg value="${TestRunnerAPK}" />
+			<arg value="${apks.dir}/SAFSTestRunner_debug.apk" />
+		</java>
+		<java jar="${apkResigner}" fork="true">
+			<arg value="${SAFSTCPMessengerAPK}" />
+			<arg value="${apks.dir}/SAFSTCPMessenger_debug.apk" />
+		</java>
+	</target>
+
+	<target name="decode-Res" depends="resignApk">
+		<java jar="${base.dir}/tools/apktool.jar" fork="true">
+			<arg value="d" />
+			<arg value="-f" />
+			<arg value="-o" />
+			<arg value="${base.dir}/temp" />
+			<arg value="${apks.dir}/xxx_debug.apk" />
+		</java>
+	</target>
+
+	<target name="clean" depends="decode-Res">
+		<copydir src="${base.dir}/temp/res" dest="${base.dir}/res" />
+		<copy file="${base.dir}/temp/${manifest-xml}" todir="${base.dir}/"
+			overwrite="true" />
+		<delete dir="${base.dir}/temp" />
+	</target>
+
+	<target name="gen-R" depends="clean">
+		<echo>Generating R.java from the resources...</echo>
+		<exec executable="${aapt}" failonerror="true">
+			<arg value="package" />
+			<arg value="-f" />
+			<arg value="-m" />
+			<arg value="-J" />
+			<arg value="${base.dir}/src" />
+			<arg value="-S" />
+			<arg value="${resource-dir}" />
+			<arg value="-I" />
+			<arg value="${android-jar}" />
+			<arg value="-M" />
+			<arg value="${manifest-xml}" />
+		</exec>
+	</target>
+
+	<target name="native2ascii" depends="gen-R">
+		<native2ascii encoding="UTF-8" src="${base.dir}/src"
+			dest="${base.dir}/src" includes="**/*.java" ext=".java" />
+	</target>
+
+	<target name="compile" depends="native2ascii">
+		<javac encoding="UTF-8" srcdir="${base.dir}/src" destdir="${base.dir}/bin"
+			classpathref="classes" />
+	</target>
+
+	<path id="classes">
+		<fileset dir="${3rd.lib.dir}" includes="*jar" />
+		<pathelement location="${base.dir}/bin" />
+	</path>
+
+	<target name="test" depends="compile">
+		<testng classpathref="classes" outputdir="${testng.output.dir}"
+			haltOnfailure="false" delegateCommandSystemProperties="true">
+			<xmlfileset dir="${base.dir}" includes="${testng.file}" />
+		</testng>
+	</target>
+
+</project>
 
 # 常见问题 #
 ## 安装包重签名后安装时提示install parse failed no certificates ##
